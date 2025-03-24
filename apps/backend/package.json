@@ -1,16 +1,16 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "A Node.js backend server for managing APIs and database operations.",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "build": "tsc --noEmit && esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --minify",
-    "start": "nodemon --ext ts --exec \"node --loader ts-node/esm src/index.ts\""
+    "start": "nodemon --ext ts --exec \"tsx src/index.ts\""
+ 
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "keerthana",
   "packageManager": "pnpm@10.6.5",
   "dependencies": {
     "cors": "^2.8.5",

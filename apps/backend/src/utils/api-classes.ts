@@ -1,33 +1,25 @@
-// utils/errorHandler.ts
-import { StatusCodes } from 'http-status-codes';
-
- class ApiResponse {
-  statusCode: number;
+class ApiResponse {
   data: any;
-  message: string;
   success: boolean;
 
-  constructor(statusCode: number, data: any, message: string = "Success") {
-    this.statusCode = statusCode;
+  constructor(data: any) {
     this.data = data;
-    this.message = message;
-    this.success = statusCode < 400;
+    this.success = true
   }
 }
 
- class ApiError extends Error {
+class ApiError extends Error {
   statusCode: number;
-  errors: any[];
+  message: string;
   success: boolean;
 
   constructor(
-    message: string ,
-    statusCode: number ,
-    errors: any[] = [],
+    message: string,
+    statusCode: number,
   ) {
     super(message);
     this.statusCode = statusCode;
-    this.errors = errors;
+    this.message = message;
     this.success = false;
   }
 }

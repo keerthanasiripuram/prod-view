@@ -1,7 +1,6 @@
 {
-  "name": "@auth-app/source",
-  "version": "0.0.0",
-  "license": "MIT",
+  "name": "@prodview/source",
+  "version": "1.0.0",
   "scripts": {
     "start": "concurrently \"pnpm --filter client dev\" \"pnpm --filter backend start\"",
     "build": "nx run-many --target=build --parallel"
@@ -15,12 +14,14 @@
     "nx": "20.6.1",
     "prettier": "^2.6.2",
     "tslib": "^2.3.0",
+    "tsx": "^4.19.3",
     "typescript": "~5.7.2"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.8",
-    "concurrently": "^9.1.2"
+    "concurrently": "^9.1.2",
+    "zod": "^3.24.2"
   }
 }

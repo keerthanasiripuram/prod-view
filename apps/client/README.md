@@ -1,54 +1,94 @@
-# React + TypeScript + Vite
+# Product Listing with Pagination using React and Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project implements a product listing page with **pagination** using **React**, **Vite**, **Material-UI**, and **Axios**. The application fetches products from an API and displays them with pagination controls for navigation.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Paginated Product Display**
+- **Error Handling with Custom ValidationError Class**
+- **Material-UI Components for UI**
+- **Efficient API Calls using Axios**
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React** (Frontend)
+- **Vite** (Build Tool)
+- **Material-UI** (UI Components)
+- **Axios** (API Requests)
+- **Zod** (Validation Management)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 📦 Project Structure
+
+```
+/src
+ ├── components
+ │   ├── ProductGrid.tsx
+ │   ├── Pagination.tsx
+ ├── pages
+ │   ├── ProductListingPage.tsx
+ ├── services
+ │   ├── product.services.ts
+ ├── types
+ │   ├── ProductType.ts
+ ├── utils
+ │   ├── zod-err-class.ts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Installation
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+First, clone the repository and install dependencies:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+pnpm install
 ```
+
+## 🏃 Run the Development Server
+
+```bash
+pnpm dev
+```
+
+## 🔗 API Endpoint
+
+The project fetches products from the following API endpoint:
+
+```bash
+GET http://localhost:3000/api/v1/products?page=1&pageSize=2
+```
+
+- `page` → Current page number
+- `pageSize` → Number of products per page
+
+## 📌 Code Overview
+
+### 🧱 **Fetching Products**
+The `getProducts` function fetches products using Axios.
+
+```typescript
+getProducts(currentPage, pageSize)
+  .then((res) => setProducts(res.products))
+  .catch((err) => handleError(err));
+```
+
+### 📖 **Pagination Handling**
+The `handlePageChange` function updates the page number using `useCallback`.
+
+```typescript
+const handlePageChange = useCallback((event, page) => {
+  setCurrentPage(page);
+}, []);
+```
+
+### 🚩 **Error Management**
+Errors are handled using a custom `ValidationError` class.
+
+```typescript
+if (err instanceof ValidationError) {
+  setError(`Validation failed: ${err.validationErrors.map(e => e.message).join(', ')}`);
+} else {
+  setError(err.response?.data?.error || 'An unknown error occurred');
+}
+```
+
+
+

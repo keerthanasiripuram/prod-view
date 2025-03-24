@@ -8,15 +8,16 @@ interface PaginationProps {
   onPageChange: (event: React.ChangeEvent<unknown>, page: number) => void;
 }
 
-const Pagination1: React.FC<PaginationProps> = ({
+const Pagination: React.FC<PaginationProps> = ({
   total,
   currentPage,
   pageSize,
   onPageChange,
 }) => {
+
   // Total pages calculation
   const totalPages = Math.ceil(total / pageSize);
-  console.log(total, currentPage, pageSize)
+
   return (
     <div className="pagination-container">
       {/* Pagination control from Material-UI */}
@@ -30,4 +31,4 @@ const Pagination1: React.FC<PaginationProps> = ({
   );
 };
 
-export default Pagination1;
+export default React.memo(Pagination);

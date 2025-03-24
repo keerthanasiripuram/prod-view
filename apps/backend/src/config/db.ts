@@ -1,9 +1,9 @@
 import pgPromise from "pg-promise";
 import { getEnv } from "../utils/env.js";
 
-const pgp=pgPromise()
+const pgp = pgPromise();
 
-const dbConfig={
+const dbConfig = {
   host: getEnv('DB_HOST'),
   port: Number(getEnv('DB_PORT')),
   database: getEnv('DB_NAME'),
@@ -12,11 +12,11 @@ const dbConfig={
   max: Number(getEnv('DB_MAX')),
   idleTimeoutMillis: Number(getEnv('DB_IDLE_TIMEOUT')),
   connectionTimeoutMillis: Number(getEnv('DB_CONNECTION_TIMEOUT')),
-}
+};
 
-export  const db = pgp(dbConfig)
+export const db = pgp(dbConfig);
 
-export const checkDbConnection = async (retries = 5, delay = 2000) => {
+export const connectToDb = async (retries = 5, delay = 2000) => {
   console.log("Waiting for DB connection...");
   for (let i = 0; i < retries; i++) {
     try {

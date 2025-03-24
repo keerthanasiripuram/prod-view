@@ -1,15 +1,4 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "NodeNext",
-    "moduleResolution": "nodenext",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true
-  },
-  "ts-node": {
-        // Tell ts-node CLI to install the --loader automatically
-        "esm": true
-    }
+  "extends": "../../tsconfig.base.json",
 }
+

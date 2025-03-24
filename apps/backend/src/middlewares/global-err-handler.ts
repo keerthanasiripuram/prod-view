@@ -1,18 +1,31 @@
 import { StatusCodes } from 'http-status-codes';
+import { ApiError } from '../utils/api-classes.js';
+import { z } from 'zod';
 
-const globalErrorHandler = (err:any, req:any, res:any, next:any) => {
-    console.log(err)
-    //these assigning are fr the errors vch are thrwn by pg-prmse , if we
-    //could hve thrwn sme err then would hve all the dtls filled by
-    //apierror cls
-    const statusCode = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
-    const message = err.message || "Internal Server Error";
-    
-    res.status(statusCode).json({
-      statusCode,
-      message,
-      errors: err.errors || [],//only gets filled vth valdtn errs usng zod
+const globalErrorHandler = (error: any, req: any, res: any, next: any) => {
+
+  //Validation errors
+  if (error instanceof z.ZodError) {
+    res.status(StatusCodes.BAD_REQUEST).json({
       success: false,
+      message: 'Validation Error',
+      errors: error.errors
     });
-  };
-export default globalErrorHandler
+  }
+
+  //custom errors
+  if (error instanceof ApiError) {
+    res.status(error.statusCode).json({
+      error: error.message,
+      success: error.success,
+    });
+  }
+
+  //default error
+  res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    error: "Internal Server Error",
+    success: false,
+  });
+};
+
+export default globalErrorHandler;

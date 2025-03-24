@@ -14,9 +14,9 @@ if (!process.env) {
     process.exit(1);
 }
 
+//utility method to load the errors
 export const getEnv = (key: string) => {
     const value = process.env[key];
-    console.warn("value",value)
     if (value) {
         return value;
     }

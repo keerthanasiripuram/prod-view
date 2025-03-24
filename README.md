@@ -1,90 +1,126 @@
-# MyMonorepo
+# ProdView - Product Management App
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+**ProdView** is a monorepo containing a full-stack application for product management. The backend is built using **Node.js, Express, and PostgreSQL** with `pg-promise`, while the frontend uses **React, Vite, and Material-UI**. The app provides API endpoints for managing products and displays them with pagination.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## 🚀 Features
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+- Product Management API with PostgreSQL
+- Paginated Product Listing
+- CORS and Error Handling
+- API Request Management using Axios
+- Type Validation with Zod
+- Efficient Development with Monorepo Architecture
 
-## Finish your CI setup
+---
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/QCQWfjNiUc)
+## 📦 Project Structure
 
-
-## Generate a library
-
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
+```bash
+prod-view
+├── backend       # Express API Server
+├── client         # React Frontend
+└── package.json   # Monorepo Management
 ```
 
-## Run tasks
+---
 
-To build the library use:
+## 🛠️ Prerequisites
 
-```sh
-npx nx build pkg1
+- Node.js (LTS recommended)
+- PostgreSQL (v12 or later)
+- pnpm (Package Manager)
+
+---
+
+## 🧑‍💻 Installation
+
+1. Clone the repository:
+    ```
+    git clone https://github.com/keerthanasiripuram/prod-view.git
+    ```
+
+2. Navigate to the project:
+    ```
+    cd prod-view
+    ```
+
+3. Install all dependencies:
+    ```
+    pnpm install
+    ```
+
+4. Configure environment variables in a `.env` file for backend:
+
+### Backend Environment Variables
+```env
+DB_USER=<your_db_user>
+DB_HOST=<your_db_host>
+DB_NAME=<your_db_name>
+DB_PASSWORD=<your_db_password>
+DB_PORT=<your_db_port>
+DB_MAX=<max_connections>
+DB_IDLE_TIMEOUT=<idle_timeout_ms>
+DB_CONNECTION_TIMEOUT=<connection_timeout_ms>
+SERVER_PORT=<your_server_port>
+ALLOWED_ORIGINS=<origin1>,<origin2>
 ```
 
-To run any task with Nx use:
 
-```sh
-npx nx <target> <project-name>
+5. Start the application:
+    ```
+    pnpm start
+    ```
+
+This will run both the backend and frontend using **concurrently**.
+
+---
+
+## 📌 API Endpoints
+
+### **Get Products**
+
+```http
+GET /products/v1/get-products?page=1&pageSize=2
+```
+- `page`: Current page number
+- `pageSize`: Number of products per page
+
+---
+
+## 🛢️ Database Table
+
+### `products` Table
+
+![Description of Image](./apps/backend/assets/produt.db.png)
+
+For the db queries you can refer to queries.sql in backend
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+---
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## 🎯 Technologies Used
 
-## Versioning and releasing
+- **Node.js & Express** (Backend)
+- **PostgreSQL & pg-promise** (Database Management)
+- **React & Vite** (Frontend)
+- **Material-UI** (UI Library)
+- **Axios** (HTTP Client)
+- **Zod** (Validation)
+- **Concurrently** (Process Management)
 
-To version and release the library use
+---
 
-```
-npx nx release
-```
+## 📖 Additional Notes
 
-Pass `--dry-run` to see what would happen without actually releasing the library.
+- Ensure PostgreSQL is running and the database is created before starting the server.
+- Customize the `ALLOWED_ORIGINS` in your `.env` file to restrict cross-origin requests.
 
-[Learn more about Nx release &raquo;](hhttps://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+---
 
-## Keep TypeScript project references up to date
+## 🧑‍💼 Author
+Developed by **Keerthana Siripuram**
 
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
+[GitHub Repository](https://github.com/keerthanasiripuram/prod-view)
 
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
+---
 
-```sh
-npx nx sync
-```
-
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
-
-```sh
-npx nx sync:check
-```
-
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
-
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)

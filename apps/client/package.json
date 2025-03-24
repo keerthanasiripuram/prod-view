@@ -1,8 +1,9 @@
 {
   "name": "client",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "Client-side application built with React for managing user interactions.",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
