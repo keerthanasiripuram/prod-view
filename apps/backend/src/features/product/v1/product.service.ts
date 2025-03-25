@@ -1,6 +1,6 @@
 import { getProductsRepository } from "./product.repo.js";
-import { Product } from "./product.types.js";
-
+// import { Product } from "./product.types.js";
+import { Product } from '@prodview/shared-types';
 export const getProductsService = async (page:number, pageSize: number): Promise<{ products: Product[], totalCount: number }> => {
   const { products, totalCount }: { products: Product[], totalCount: number } = await getProductsRepository(page, pageSize);
   const convertedProducts = products.map((product) => ({

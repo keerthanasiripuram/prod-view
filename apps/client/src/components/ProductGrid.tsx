@@ -1,4 +1,5 @@
-import { Product } from '../types/product.type';
+// import { Product } from '../types/product.type';
+import { Product } from '@prodview/shared-types';
 import { Card, CardContent, styled, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 
@@ -27,6 +28,8 @@ type ProductGridProps = {
 }
 
 const ProductGrid = ({ products }: ProductGridProps) => {
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   return (
     <Grid container spacing={12}
       justifyContent="center"
@@ -36,7 +39,7 @@ const ProductGrid = ({ products }: ProductGridProps) => {
           <StyledCard>
             <CardContent>
               <StyledImage
-                src={`http://localhost:3000/${product.image}`}
+                src={`${apiUrl}/${product.image}`}
                 alt={product.title}
               />
               <Typography variant="h5">{product.title}</Typography>

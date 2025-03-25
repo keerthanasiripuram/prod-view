@@ -1,4 +1,5 @@
-import { ProductsResponseSchema, Product } from '../types/product.type';
+// import { ProductsResponseSchema, Product } from '../types/product.type';
+import { Product,ProductsResponseSchema } from '@prodview/shared-types';
 import { getAPI } from '../utils/api-client';
 import ValidationError from '../utils/zod-err-class';
 

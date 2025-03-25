@@ -71,6 +71,11 @@ ALLOWED_ORIGINS=<origin1>,<origin2>
     pnpm start
     ```
 
+6. Build the application:
+        ```
+    pnpm build
+    ```
+
 This will run both the backend and frontend using **concurrently**.
 
 ---

@@ -1,10 +1,14 @@
 import { useCallback, useEffect, useState } from 'react'
-import { Product } from '../types/product.type';
+// import { Product } from '../types/product.type';
+import { Product } from '@prodview/shared-types';
 import ProductGrid from '../components/ProductGrid';
 import Pagination from '../components/Pagination';
 import { getProducts } from '../services/product.services';
 import { styled, Typography } from '@mui/material';
 import ValidationError from '../utils/zod-err-class';
+// import {LoadingIndicator} from '@prodview/shared-ui';
+import {ErrorComponent, LoadingIndicator} from "@prodview/shared-ui"
+
 
 const CenterDiv = styled('div')`
 display:flex;
@@ -13,6 +17,7 @@ justify-content:center;
 align-items:center;
 width:100vw;
 margin:auto;
+gap:20px;
 `;
 
 const ProductListingPage = () => {
@@ -33,7 +38,7 @@ const ProductListingPage = () => {
     //function to load the products
     useEffect(() => {
         setIsLoading(true)
-        getProducts(currentPage, pageSize)
+        getProducts(currentPage, pageSize)    
             .then((res) => {
                 console.log(res.products)
                 setProducts(res.products)
@@ -53,24 +58,24 @@ const ProductListingPage = () => {
     }, [currentPage]);
 
     if (isLoading) {
-        return <Typography variant="h6">Loading...</Typography>
+        // return <Typography variant="h6">Loading...</Typography>
+        return <LoadingIndicator/>
     }
 
     if (error) {
-        return <Typography color="error">{error}</Typography>
+        // return <Typography color="error">{error}</Typography>
+        return <ErrorComponent error={error}/>
     }
-
+ 
     if (products.length === 0) {
-        return <Typography>No products found</Typography>
+        return <Typography>N products found</Typography>
     } else {
         return (
             <CenterDiv>
                 <Typography variant="h4">Products</Typography>
-                <br></br>
                 <ProductGrid products={products} />
-                <br></br>
                 <Pagination
-                    total={totalProducts}
+                    total={totalProducts}    
                     currentPage={currentPage}
                     pageSize={pageSize}
                     onPageChange={handlePageChange}
